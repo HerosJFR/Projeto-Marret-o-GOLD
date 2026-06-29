@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Mecânica</title>
+    <style>
+        /* --- ESTILIZAÇÃO GERAL (CSS) --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Container que simula a tela do celular/aplicativo */
+        .app-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 400px;
+            height: 650px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 30px 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Classes para mostrar/esconder as telas */
+        .screen {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        /* Tipografia e Títulos */
+        h1 {
+            color: #1a237e; /* Azul mecânico */
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        p.subtitle {
+            color: #757575;
+            font-size: 14px;
+            margin-bottom: 32px;
+            line-height: 1.4;
+        }
+
+        /* Formulários (Tela 1) */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #424242;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 15px;
+            background-color: #fafafa;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #ff9800; /* Laranja de destaque */
+        }
+
+        textarea {
+            resize: none;
+            height: 120px;
+        }
+
+        /* Botões */
+        .btn-primary {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: auto; /* Empurra o botão para o final da tela */
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #e65100;
+        }
+
+        .btn-secondary {
+            background-color: #1a237e;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #0d1442;
+        }
+
+        /* Linha do Tempo / Progresso (Tela 2) */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            flex-shrink: 0;
+        }
+
+        /* Status da Linha do Tempo */
+        .timeline-item.done .circle { background-color: #4caf50; } /* Verde */
+        .timeline-item.active .circle { background-color: #ff9800; } /* Laranja */
+
+        .item-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #212121;
+        }
+
+        .item-info p {
+            font-size: 13px;
+            color: #757575;
+        }
+
+        .simular-link {
+            text-align: center;
+            color: #ff9800;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: auto;
+            text-decoration: none;
+        }
+
+        /* Tela de Sucesso (Tela 3) */
+        .success-screen {
+            text-align: center;
+            justify-content: center;
+        }
+
+        .success-icon {
+            width: 90px;
+            height: 90px;
+            background-color: #e8f5e9;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            margin: 0 auto 24px auto;
+        }
+
+        .summary-card {
+            background-color: #f5f5f5;
+            border-radius: 16px;
+            padding: 16px;
+            text-align: left;
+            margin: 32px 0;
+        }
+
+        .summary-card h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .summary-card ul {
+            list-style: none;
+            font-size: 14px;
+            color: #616161;
+        }
+
+        .summary-card li {
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+
+        <div id="tela-pedido" class="screen active">
+            <h1>Novo Pedido</h1>
+            <p class="subtitle">Conte-nos o que o seu veículo precisa.</p>
+            
+            <div class="form-group">
+                <label for="veiculo">Modelo do Veículo</label>
+                <input type="text" id="veiculo" placeholder="Ex: Civic 2020">
+            </div>
+
+            <div class="form-group">
+                <label for="problema">Descrição do Problema</label>
+                <textarea id="problema" placeholder="Descreva o que está acontecendo..."></textarea>
+            </div>
+
+            <button class="btn-primary" onclick="mudarTela('tela-progresso')">Enviar Pedido</button>
+        </div>
+
+
+        <div id="tela-progresso" class="screen">
+            <h1>Status do Serviço</h1>
+            <p class="subtitle">Acompanhe o que está sendo feito no seu carro.</p>
+
+            <div class="timeline">
+                <div class="timeline-item done">
+                    <div class="circle"></div>
+                    <div class="item-info">
+                        <h3>Análise do veículo</h3>
+                        <p>Concluído</p>
+                    </div>
+                </div>
+                <div class="timeline-item active">
+                    <div class="circle"></div>
+                    <div class="item-info">
+                        <h3>Troca de peças</h3>
+                        <p>Em andamento...</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="circle"></div>
+                    <div class="item-info">
+                        <h3>Testes de segurança</h3>
+                        <p>Aguardando</p>
+                    </div>
+                </div>
+            </div>
+
+            <a class="simular-link" onclick="mudarTela('tela-finalizacao')">Simular Finalização →</a>
+        </div>
+
+
+        <div id="tela-finalizacao" class="screen success-screen">
+            <div class="success-icon">✅</div>
+            <h1>Tudo Pronto!</h1>
+            <p class="subtitle" style="margin-bottom: 0;">O serviço foi totalmente concluído. Seu veículo já pode ser retirado!</p>
+
+            <div class="summary-card">
+                <h4>Resumo do Serviço:</h4>
+                <ul>
+                    <li>• Troca de Óleo realizada</li>
+                    <li>• Pastilhas de freio substituídas</li>
+                </ul>
+            </div>
+
+            <button class="btn-primary btn-secondary" onclick="mudarTela('tela-pedido')">Voltar ao Início</button>
+        </div>
+
+    </div>
+
+    <script>
+        function mudarTela(idNovaTela) {
+            // Esconde todas as telas removendo a classe 'active'
+            document.querySelectorAll('.screen').forEach(tela => {
+                tela.classList.remove('active');
+            });
+            
+            // Mostra apenas a tela desejada adicionando a classe 'active'
+            document.getElementById(idNovaTela).classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
