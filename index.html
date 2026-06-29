@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auto Mecânica</title>
     <style>
-        /* --- ESTILIZAÇÃO GERAL (CSS) --- */
+       
         * {
             margin: 0;
             padding: 0;
@@ -24,7 +24,7 @@
             padding: 20px;
         }
 
-        /* Container que simula a tela do celular/aplicativo */
+        
         .app-container {
             background-color: #ffffff;
             width: 100%;
@@ -39,7 +39,7 @@
             overflow: hidden;
         }
 
-        /* Classes para mostrar/esconder as telas */
+        
         .screen {
             display: none;
             flex-direction: column;
@@ -50,9 +50,9 @@
             display: flex;
         }
 
-        /* Tipografia e Títulos */
+       
         h1 {
-            color: #1a237e; /* Azul mecânico */
+            color: #1a237e; 
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 8px;
@@ -65,7 +65,7 @@
             line-height: 1.4;
         }
 
-        /* Formulários (Tela 1) */
+        
         .form-group {
             margin-bottom: 20px;
         }
@@ -90,7 +90,7 @@
         }
 
         input:focus, textarea:focus {
-            border-color: #ff9800; /* Laranja de destaque */
+            border-color: #ff9800; 
         }
 
         textarea {
@@ -98,7 +98,7 @@
             height: 120px;
         }
 
-        /* Botões */
+       
         .btn-primary {
             background-color: #ff9800;
             color: white;
@@ -108,7 +108,7 @@
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
-            margin-top: auto; /* Empurra o botão para o final da tela */
+            margin-top: auto; 
             transition: background-color 0.2s;
         }
 
@@ -125,7 +125,7 @@
             background-color: #0d1442;
         }
 
-        /* Linha do Tempo / Progresso (Tela 2) */
+        
         .timeline {
             display: flex;
             flex-direction: column;
@@ -146,9 +146,9 @@
             flex-shrink: 0;
         }
 
-        /* Status da Linha do Tempo */
-        .timeline-item.done .circle { background-color: #4caf50; } /* Verde */
-        .timeline-item.active .circle { background-color: #ff9800; } /* Laranja */
+     
+        .timeline-item.done .circle { background-color: #4caf50; } 
+        .timeline-item.active .circle { background-color: #ff9800; } 
 
         .item-info h3 {
             font-size: 16px;
@@ -171,7 +171,7 @@
             text-decoration: none;
         }
 
-        /* Tela de Sucesso (Tela 3) */
+  
         .success-screen {
             text-align: center;
             justify-content: center;
@@ -288,12 +288,12 @@
 
     <script>
         function mudarTela(idNovaTela) {
-            // Esconde todas as telas removendo a classe 'active'
+           
             document.querySelectorAll('.screen').forEach(tela => {
                 tela.classList.remove('active');
             });
             
-            // Mostra apenas a tela desejada adicionando a classe 'active'
+            
             document.getElementById(idNovaTela).classList.add('active');
         }
     </script>
